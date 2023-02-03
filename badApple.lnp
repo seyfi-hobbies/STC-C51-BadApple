@@ -1,0 +1,6 @@
+"STARTUP.obj",
+"main.obj",
+"st7565.obj",
+"Serial.obj" 
+TO "badApple" 
+RAMSIZE(256) 

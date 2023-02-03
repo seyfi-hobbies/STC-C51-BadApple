@@ -1,0 +1,96 @@
+C51 COMPILER V9.60.7.0   SERIAL                                                            02/02/2023 23:18:42 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE SERIAL
+OBJECT MODULE PLACED IN Serial.OBJ
+COMPILER INVOKED BY: C:\Keil_v5_9.61\C51\BIN\C51.EXE Serial.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          ///suppose the frequency of test chip is 18.432MHz
+   2          #include "Serial.h"
+   3          
+   4          /*----------------------------
+   5          Initialize serial port
+   6          ----------------------------*/
+   7          void InitUart()
+   8          {
+   9   1       SCON = 0x5a; //UART1 in 8-bit variable baud rate mode
+  10   1      #if URMD == 0
+  11   1       T2L = 0xd8; //Set the auto-reload parameter
+  12   1       T2H = 0xff; //115200 bps(65536-18432000/4/115200)
+  13   1       AUXR = 0x14; //T2 in 1T mode, strat up Timer 2
+  14   1       AUXR |= 0x01; //Timer 2 as baud-rate Generator of UART1
+  15   1      #elif URMD == 1
+               AUXR = 0x40; //T1 in 1T mode
+               TMOD = 0x00; //Timer1 in mode 0(16-bit auto-reload mode
+               TL1 = 0xd8; //Set the auto-reload parameter
+               TH1 = 0xff; //115200 bps(65536-18432000/4/115200)
+               TR1 = 1; //strat up Timer 1
+              #else
+               TMOD = 0x20; //Timer1 in mode 2 (8-bit auto-reload mode)
+               AUXR = 0x40; //T1 in 1T mode
+               TH1 = TL1 = 0xfb; //115200 bps(256 - 18432000/32/115200)
+               TR1 = 1;
+              #endif
+  27   1      }
+  28          
+  29          
+  30          
+  31          /*******************************************************************************
+  32          Seyfi: Serial test works with XTAL (clock freq) :18.432MHz
+  33          *******************************************************************************/
+  34          /*
+  35          void main()
+  36          { 
+  37            unsigned char *msg = "hello seyfi";
+  38            //BYTE idata *iptr;
+  39            BYTE i;
+  40            InitUart(); //initialize serial port
+  41            
+  42            for (i=0; i<11; i++) //read 7 bytes
+  43            {
+  44              SendUart(msg[i]); //send ID number to serial port
+  45            }
+  46            
+  47            while(1) {
+  48                i = RecvUart();
+  49                SendUart(i);
+  50                //Delay10ms(2000);
+  51            }
+  52                
+  53          }
+  54          
+  55          */
+C51 COMPILER V9.60.7.0   SERIAL                                                            02/02/2023 23:18:42 PAGE 2   
+
+  56          /*----------------------------
+  57          Send serial port data
+  58          ----------------------------*/
+  59          void SendUart(BYTE dat)
+  60          {
+  61   1       while (!TI); //wait to finish transmitting
+  62   1       TI = 0; 
+  63   1       SBUF = dat; //Send serial port data
+  64   1      }
+  65          
+  66          BYTE RecvUart()
+  67          {
+  68   1       while (!RI); //wait receive complete
+  69   1       RI = 0; //clear RI flag
+  70   1       return SBUF; //return receive data
+  71   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     32    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

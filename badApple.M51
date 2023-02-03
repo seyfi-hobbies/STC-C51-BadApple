@@ -1,0 +1,331 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    02/02/2023  23:18:42  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5_9.61\C51\BIN\BL51.EXE STARTUP.obj, main.obj, st7565.obj, Serial.obj TO badApple RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  main.obj (MAIN)
+  st7565.obj (ST7565)
+  Serial.obj (SERIAL)
+  C:\KEIL_V5_9.61\C51\LIB\C51S.LIB (?C?CLDPTR)
+
+
+LINK MAP OF MODULE:  badApple (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0007H     UNIT         _DATA_GROUP_
+            IDATA   000FH     0001H     UNIT         ?STACK
+
+            * * * * * * *  X D A T A   M E M O R Y  * * * * * * *
+            XDATA   0000H     0400H     UNIT         ?XD?MAIN
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     006BH     UNIT         ?PR?_PICTURE_12864?MAIN
+            CODE    086BH     006BH     UNIT         ?PR?LCD12864_INIT?ST7565
+            CODE    08D6H     0044H     UNIT         ?PR?MAIN?MAIN
+            CODE    091AH     0029H     UNIT         ?PR?LCD12864_CLEARSCREEN?ST7565
+            CODE    0943H     0019H     UNIT         ?C?LIB_CODE
+            CODE    095CH     0011H     UNIT         ?PR?_LCDST7565_WRITECMD?ST7565
+            CODE    096DH     0011H     UNIT         ?PR?_LCDST7565_WRITEDATA?ST7565
+            CODE    097EH     0010H     UNIT         ?PR?INITUART?SERIAL
+            CODE    098EH     000CH     UNIT         ?C_C51STARTUP
+            CODE    099AH     0008H     UNIT         ?PR?_SENDUART?SERIAL
+            CODE    09A2H     0008H     UNIT         ?PR?RECVUART?SERIAL
+
+
+
+OVERLAY MAP OF MODULE:   badApple (?C_STARTUP)
+
+
+SEGMENT                                   DATA_GROUP 
+  +--> CALLED SEGMENT                   START    LENGTH
+-------------------------------------------------------
+?C_C51STARTUP                           -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                           0008H    0002H
+  +--> ?PR?LCD12864_INIT?ST7565
+  +--> ?PR?LCD12864_CLEARSCREEN?ST7565
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  02/02/2023  23:18:42  PAGE 2
+
+
+  +--> ?PR?INITUART?SERIAL
+  +--> ?PR?_SENDUART?SERIAL
+  +--> ?PR?RECVUART?SERIAL
+  +--> ?PR?_PICTURE_12864?MAIN
+
+?PR?LCD12864_INIT?ST7565                -----    -----
+  +--> ?PR?_LCDST7565_WRITECMD?ST7565
+
+?PR?LCD12864_CLEARSCREEN?ST7565         -----    -----
+  +--> ?PR?_LCDST7565_WRITECMD?ST7565
+  +--> ?PR?_LCDST7565_WRITEDATA?ST7565
+
+?PR?_PICTURE_12864?MAIN                 000AH    0005H
+  +--> ?PR?_LCDST7565_WRITECMD?ST7565
+  +--> ?PR?_LCDST7565_WRITEDATA?ST7565
+
+
+
+SYMBOL TABLE OF MODULE:  badApple (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:098EH         SEGMENT       ?C_C51STARTUP
+  I:000FH         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0991H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:098EH         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:098EH         LINE#         133
+  C:0990H         LINE#         134
+  C:0991H         LINE#         135
+  C:0992H         LINE#         136
+  C:0994H         LINE#         185
+  C:0997H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  02/02/2023  23:18:42  PAGE 3
+
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  C:08D6H         PUBLIC        main
+  X:0000H         PUBLIC        pic
+  C:0800H         PUBLIC        _Picture_12864
+  -------         PROC          _PICTURE_12864
+  D:000AH         SYMBOL        ptr
+  -------         DO            
+  D:000DH         SYMBOL        i
+  D:000EH         SYMBOL        j
+  -------         ENDDO         
+  C:0800H         LINE#         11
+  C:0806H         LINE#         12
+  C:0806H         LINE#         15
+  C:0809H         LINE#         16
+  C:0809H         LINE#         17
+  C:0810H         LINE#         19
+  C:081BH         LINE#         21
+  C:0822H         LINE#         22
+  C:0829H         LINE#         25
+  C:082CH         LINE#         26
+  C:082CH         LINE#         27
+  C:0832H         LINE#         28
+  C:083BH         LINE#         29
+  C:083EH         LINE#         30
+  C:083EH         LINE#         31
+  C:084DH         LINE#         33
+  C:0858H         LINE#         34
+  C:0861H         LINE#         35
+  C:086AH         LINE#         37
+  -------         ENDPROC       _PICTURE_12864
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        idx
+  -------         ENDDO         
+  C:08D6H         LINE#         39
+  C:08D6H         LINE#         40
+  C:08D6H         LINE#         42
+  C:08D9H         LINE#         43
+  C:08DCH         LINE#         45
+  C:08DFH         LINE#         47
+  C:08DFH         LINE#         51
+  C:08E4H         LINE#         52
+  C:08E9H         LINE#         53
+  C:08F4H         LINE#         54
+  C:090DH         LINE#         55
+  C:090FH         LINE#         56
+  C:0918H         LINE#         58
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ST7565
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  C:086BH         PUBLIC        Lcd12864_Init
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  02/02/2023  23:18:42  PAGE 4
+
+
+  C:096DH         PUBLIC        _LcdSt7565_WriteData
+  C:095CH         PUBLIC        _LcdSt7565_WriteCmd
+  C:091AH         PUBLIC        Lcd12864_ClearScreen
+  B:0090H.3       PUBLIC        LCD12864_RD
+  B:0090H.0       PUBLIC        LCD12864_CS
+  B:0090H.2       PUBLIC        LCD12864_RS
+  B:0090H.4       PUBLIC        LCD12864_RW
+  B:0090H.1       PUBLIC        LCD12864_RSET
+  -------         PROC          _LCDST7565_WRITECMD
+  D:0006H         SYMBOL        cmd
+  C:095CH         LINE#         5
+  C:095CH         LINE#         6
+  C:095CH         LINE#         7
+  C:095EH         LINE#         8
+  C:0960H         LINE#         9
+  C:0962H         LINE#         10
+  C:0964H         LINE#         11
+  C:0965H         LINE#         12
+  C:0966H         LINE#         14
+  C:0968H         LINE#         15
+  C:0969H         LINE#         16
+  C:096AH         LINE#         18
+  C:096CH         LINE#         19
+  -------         ENDPROC       _LCDST7565_WRITECMD
+  -------         PROC          _LCDST7565_WRITEDATA
+  D:0006H         SYMBOL        dat
+  C:096DH         LINE#         21
+  C:096DH         LINE#         22
+  C:096DH         LINE#         23
+  C:096FH         LINE#         24
+  C:0971H         LINE#         25
+  C:0973H         LINE#         26
+  C:0975H         LINE#         27
+  C:0976H         LINE#         28
+  C:0977H         LINE#         30
+  C:0979H         LINE#         31
+  C:097AH         LINE#         32
+  C:097BH         LINE#         34
+  C:097DH         LINE#         35
+  -------         ENDPROC       _LCDST7565_WRITEDATA
+  -------         PROC          LCD12864_INIT
+  -------         DO            
+  D:0007H         SYMBOL        i
+  -------         ENDDO         
+  C:086BH         LINE#         38
+  C:086BH         LINE#         39
+  C:086BH         LINE#         41
+  C:086DH         LINE#         42
+  C:0873H         LINE#         43
+  C:0875H         LINE#         44
+  C:0877H         LINE#         48
+  C:087EH         LINE#         49
+  C:0884H         LINE#         51
+  C:088BH         LINE#         53
+  C:0890H         LINE#         55
+  C:0895H         LINE#         57
+  C:089AH         LINE#         59
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  02/02/2023  23:18:42  PAGE 5
+
+
+  C:089FH         LINE#         61
+  C:08A4H         LINE#         62
+  C:08A9H         LINE#         64
+  C:08AEH         LINE#         65
+  C:08B3H         LINE#         67
+  C:08B8H         LINE#         69
+  C:08BDH         LINE#         70
+  C:08C3H         LINE#         72
+  C:08CAH         LINE#         74
+  C:08CFH         LINE#         75
+  C:08D5H         LINE#         77
+  -------         ENDPROC       LCD12864_INIT
+  -------         PROC          LCD12864_CLEARSCREEN
+  -------         DO            
+  D:0005H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:091AH         LINE#         79
+  C:091AH         LINE#         80
+  C:091AH         LINE#         83
+  C:091CH         LINE#         84
+  C:091CH         LINE#         86
+  C:0926H         LINE#         89
+  C:092DH         LINE#         90
+  C:0932H         LINE#         92
+  C:0934H         LINE#         93
+  C:0934H         LINE#         94
+  C:093AH         LINE#         95
+  C:093EH         LINE#         96
+  C:0942H         LINE#         97
+  -------         ENDPROC       LCD12864_CLEARSCREEN
+  -------         ENDMOD        ST7565
+
+  -------         MODULE        SERIAL
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:0098H.0       PUBLIC        RI
+  B:0098H.1       PUBLIC        TI
+  C:099AH         PUBLIC        _SendUart
+  C:09A2H         PUBLIC        RecvUart
+  D:0099H         PUBLIC        SBUF
+  D:0098H         PUBLIC        SCON
+  C:097EH         PUBLIC        InitUart
+  D:008EH         PUBLIC        AUXR
+  D:00D6H         PUBLIC        T2H
+  D:00D7H         PUBLIC        T2L
+  -------         PROC          INITUART
+  C:097EH         LINE#         7
+  C:097EH         LINE#         8
+  C:097EH         LINE#         9
+  C:0981H         LINE#         11
+  C:0984H         LINE#         12
+  C:0987H         LINE#         13
+  C:098AH         LINE#         14
+  C:098DH         LINE#         27
+  -------         ENDPROC       INITUART
+  -------         PROC          _SENDUART
+  D:0007H         SYMBOL        dat
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  02/02/2023  23:18:42  PAGE 6
+
+
+  C:099AH         LINE#         59
+  C:099AH         LINE#         60
+  C:099AH         LINE#         61
+  C:099DH         LINE#         62
+  C:099FH         LINE#         63
+  C:09A1H         LINE#         64
+  -------         ENDPROC       _SENDUART
+  -------         PROC          RECVUART
+  C:09A2H         LINE#         66
+  C:09A2H         LINE#         67
+  C:09A2H         LINE#         68
+  C:09A5H         LINE#         69
+  C:09A7H         LINE#         70
+  C:09A9H         LINE#         71
+  -------         ENDPROC       RECVUART
+  -------         ENDMOD        SERIAL
+
+  -------         MODULE        ?C?CLDPTR
+  C:0943H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0194H BYTE (19%) *
+******************************************************************************
+
+Program Size: data=16.0 xdata=1024 code=429
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
