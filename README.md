@@ -6,7 +6,7 @@ I programmed the chip to play video of Bad Apple.
 
 See it in action : todo youtube link
 
-This game kit is very cheap and some of them comes with STC15F2K60S2.
+This game kit is very affordable and some of them comes with STC15F2K60S2.
 
 Features of the chip: 
 * 60K Flash Memory
@@ -14,7 +14,7 @@ Features of the chip:
 * 2 Timers
 * Hardware SPI
 
-For this project I used a Nokia LCD display B/W 128x80 pixels.
+For this project I used a Nokia monochrome LCD display with 128x64 pixels.
 
 Frames are stored in 'badAppleLow.bin' as binary file.
 
